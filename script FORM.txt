@@ -1,0 +1,10 @@
+FROM centos:centos7
+RUN curl -O https://dlcdn.apache.org/tomcat/tomcat-8/v8.5.98/bin/apache-tomcat-8.5.98.tar.gz
+RUN tar -xvf apache-tomcat-8.5.98.tar.gz -C /opt
+RUN yum install java -y
+COPY ./student.war /opt/apache-tomcat-8.5.98/webapps/
+COPY ./mysql-connector.jar /opt/apache-tomcat-8.5.98/lib/
+COPY ./context.xml /opt/apache-tomcat-8.5.98/conf/
+EXPOSE 8080
+WORKDIR /opt/apache-tomcat-8.5.98
+CMD ./bin/catalina.sh run
